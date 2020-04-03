@@ -1,22 +1,24 @@
 import React from 'react'
-import httpRequest from '../utils/httpRequest'
-import Header from './Header'
-import { Spinner } from 'react-bootstrap'
+import { TokenContext } from '../context/context'
+import jwt_decode from 'jwt-decode'
+import { Container, Row, Spinner } from 'react-bootstrap'
 
 class Home extends React.Component {
+
+    static contextType = TokenContext
+    
     constructor() {
         super()
-        this.state= {
-            principal: '',
+        this.state={
+            principal: {},
             isLoading: true
         }
     }
-
+    
     componentDidMount() {
-        let response = httpRequest.get('http://localhost:8080/home')
         this.setState(prevState => {
             return {
-                principal: response,
+                principal: jwt_decode(this.context),
                 isLoading: !(prevState.isLoading)
             }
         })
@@ -24,10 +26,16 @@ class Home extends React.Component {
 
     render() {
         return (
-            <div>
-                <Header />
-                {this.state.isLoading ? <Spinner animation='border'/> : <h3>Welcome, {this.state.principal}!</h3>}
-            </div>
+            <Container className='my-5'>
+                <Row className='justify-content-md-center'>
+                    {
+                        this.state.isLoading ? 
+                            (<Spinner animation='border'/>) 
+                            : 
+                            (<h1>Welcome, {this.state.principal.username}!</h1>)
+                    }
+                </Row>
+            </Container>
         )
     }
 }

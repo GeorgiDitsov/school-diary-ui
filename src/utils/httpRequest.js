@@ -1,25 +1,54 @@
-import axios from 'axios'
+import { getTokenCookie } from './cookie'
 
 class HttpRequest {
 
     static async get(url) {
-        return axios.get(url)
-            .then(response => {
-                return response
-            }).catch(error => {
-                return error
-            })
+        return await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Authorization': getTokenCookie().value 
+            }
+        }).catch(error => {
+            throw new Error(error)
+        })
     }
 
-    static async post(url, body) {
-        return axios.post(url, JSON.stringify(body), {
+    static async post(url, requestBody) {
+        return await fetch(url, {
+            method: 'POST',
             headers: {
-                'Content-Type':'application/json'
-            }
-        }).then(response => {
-            return response
+                'Content-Type':'application/json',
+                'Authorization': getTokenCookie().value
+            },
+            body: JSON.stringify(requestBody)
         }).catch(error => {
-            return error
+            throw new Error(error)
+        })
+    }
+
+    static async put(url, requestBody) {
+        return await fetch(url, {
+            method: 'PUT',
+            headers: {
+                'Content-Type':'application/json',
+                'Authorization': getTokenCookie().value
+            },
+            body: JSON.stringify(requestBody)
+        }).catch(error => {
+            throw new Error(error)
+        })
+    }
+
+    static async delete(url, requestBody) {
+        return await fetch(url, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type':'application/json',
+                'Authorization': getTokenCookie().value
+            },
+            body: JSON.stringify(requestBody)
+        }).catch(error => {
+            throw new Error(error)
         })
     }
 }

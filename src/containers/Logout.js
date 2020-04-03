@@ -1,13 +1,12 @@
 import React from 'react'
-import { Redirect } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
+import AuthenticationService from '../services/AuthenticationService'
 
-function Logout(props) {
-    const [ isLoggedIn, setIsLoggedIn ] = React.useState(props.isLoggedIn)
-
-    isLoggedIn && setIsLoggedIn(false)
-
+const Logout = () => {
+    const history = useHistory()
+    AuthenticationService.attemptLogout() && history.push()
     return (
-        !isLoggedIn && <Redirect to='/login'/>
+        <React.Fragment/>
     )
 }
 
