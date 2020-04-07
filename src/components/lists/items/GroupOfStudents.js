@@ -1,15 +1,23 @@
 import React from 'react'
-import ItemOptions from '../../buttons/ItemOptions'
+import { useTranslation } from 'react-i18next'
+import AdminOptions from '../../buttons/AdminOptions'
 
-function GroupOfStudents(props) {
+export const GroupOfStudentsColumnNames = () => {
+    const { t } = useTranslation()
     return (
-        <tr>
-            <td>{props.group.id}</td>
-            <td>{props.group.year}</td>
-            <td>{props.group.letter}</td>
-            <ItemOptions id={props.group.id}/>
-        </tr>
+        <React.Fragment>
+            <th>{t('id')}</th>
+            <th>{t('class')}</th>
+        </React.Fragment>
     )
 }
 
-export default GroupOfStudents
+export const GroupOfStudentsRow = (props) => {
+    return (
+        <tr>
+            <td>{props.group.id}</td>
+            <td>{props.group.view}</td>
+            <AdminOptions id={props.group.id}/>
+        </tr>
+    )
+}

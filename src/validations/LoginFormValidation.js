@@ -1,11 +1,15 @@
 import * as Yup from 'yup'
 import { USERNAME_PATTERN, PASSWORD_PATTERN } from '../utils/pattern'
 
-export const LoginValidationSchema = Yup.object({
-    username: Yup.string()
-        .matches(USERNAME_PATTERN, 'Username does not match the pattern')
-        .required('Required field'),
-    password: Yup.string()
-        .matches(PASSWORD_PATTERN, 'Password does not match the pattern')
-        .required('Required field')
-})
+const LoginValidationSchema = (props) => {
+    return Yup.object({
+        username: Yup.string()
+            .matches(USERNAME_PATTERN, props.translate('message.error.validation.customer.username'))
+            .required(props.translate('message.error.validation.required')),
+        password: Yup.string()
+            .matches(PASSWORD_PATTERN, props.translate('message.error.validation.customer.password'))
+            .required(props.translate('message.error.validation.required'))
+    })
+}
+
+export default LoginValidationSchema

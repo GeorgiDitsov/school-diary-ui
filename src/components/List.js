@@ -1,13 +1,15 @@
 import React from 'react'
 import { Table } from 'react-bootstrap'
+import { useTranslation } from 'react-i18next'
 
-function List(props) {
+const List = (props) => {
+    const { t } = useTranslation()
     return ( 
         <Table striped bordered responsive>
             <thead className='thead-dark'>
                 <tr>
-                    {Object.keys(props.item).map(key => (<th key={key}>{key}</th>))}
-                    <th>options</th>
+                    {props.columnNames}
+                    <th>{t('options')}</th>
                 </tr>
             </thead>
             <tbody>

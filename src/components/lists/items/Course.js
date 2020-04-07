@@ -1,16 +1,27 @@
 import React from 'react'
-import ItemOptions from '../../buttons/ItemOptions'
+import { useTranslation } from 'react-i18next'
+import AdminOptions from '../../buttons/AdminOptions'
 
-function Course(props) {
-    return (
-        <tr>
-            <td>{props.course.id}</td>
-            <td>{props.course.group.year + props.course.group.letter}</td>
-            <td>{props.course.subject.name}</td>
-            <td>{props.course.teacher === null ? 'n/a' : props.course.teacher.name + ', ' + props.course.teacher.pin}</td>
-            <ItemOptions id={props.course.id}/>
-        </tr>
+export const CourseColumnNames = () => {
+    const { t } = useTranslation()
+    return(
+        <React.Fragment>
+            <th>{t('id')}</th>
+            <th>{t('class')}</th>
+            <th>{t('school.subject')}</th>
+            <th>{t('teacher')}</th>
+        </React.Fragment>
     )
 }
 
-export default Course
+export const CourseRow = (props) => {
+    return (
+        <tr>
+            <td>{props.course.id}</td>
+            <td>{props.course.group.view}</td>
+            <td>{props.course.subject.name}</td>
+            <td>{props.course.teacher === null ? 'n/a' : props.course.teacher.name + ', ' + props.course.teacher.pin}</td>
+            <AdminOptions id={props.course.id}/>
+        </tr>
+    )
+}

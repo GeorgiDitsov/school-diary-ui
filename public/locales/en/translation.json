@@ -1,0 +1,98 @@
+{
+    "school": {
+        "diary": "School Diary",
+        "subject": "Subject",
+        "subjects": "Subjects"
+    },
+    "message": {
+        "login": "Please, log in.",
+        "welcome": "Welcome, {{username}}!",
+        "add": {
+            "customer": "Add new customer",
+            "student": "Add new student",
+            "parent": "Add new parent",
+            "teacher": "Add new teacher",
+            "subject": "Add new school subject",
+            "course": "Add new course",
+            "class": "Add new class",
+            "semester": "Add new semester",
+            "grade": "Add new grade"
+        },
+        "edit": {
+            "customer": "Edit customer with id",
+            "student": "Edit student with id",
+            "parent": "Edit parent with id",
+            "teacher": "Edit teacher with id",
+            "subject": "Edit school subject with id",
+            "course": "Edit course with id",
+            "class": "Edit class with id",
+            "semester": "Edit semester with id",
+            "grade": "Edit grade with id"
+        },
+        "error": {
+            "400": {
+                "title": "Error 400: Bad Request",
+                "body": "Bad request sent to the api."
+            },
+            "401": {
+                "title": "Error 401: Unauthorized",
+                "body": "Sorry for disturbing you, but you don't have access to this page."
+            },
+            "404": {
+                "title": "Error 404: Not Found",
+                "body": "Sorry for disturbing you, but you are lost."
+            },
+            "validation": {
+                "required": "Required field",
+                "customer": {
+                    "username": "Username does not match the pattern",
+                    "password": "Password does not match the pattern"
+                }
+            }
+        }
+    },
+    "username": "Username",
+    "password": "Password",
+    "role": "Role",
+    "info": "Info",
+    "login": "Login",
+    "logout": "Logout",
+    "id": "Id",
+    "name": "Name",
+    "pin": "PIN",
+    "email": "E-mail",
+    "customer": "Customer",
+    "student": "Student",
+    "parent": "Parent",
+    "teacher": "Teacher",
+    "course": "Course",
+    "class": "Class",
+    "semester": "Semester",
+    "grade": "Grade",
+    "customers": "Customers",
+    "students": "Students",
+    "parents": "Parents",
+    "teachers": "Teachers",
+    "courses": "Courses",
+    "classes": "Classes",
+    "semesters": "Semesters",
+    "grades": "Grades",
+    "child": "Child",
+    "children": "Children",
+    "inserted": "Inserted",
+    "updated": "Updated",
+    "begins": "Begins",
+    "ends": "Ends",
+    "options": "Options",
+    "add": "Add",
+    "edit": "Edit",
+    "delete": "Delete",
+    "submit": "Submit",
+    "close": "Close",
+    "my": {
+        "grades": "My Grades",
+        "children": "My Children",
+        "courses": "My courses"
+    }
+    
+}

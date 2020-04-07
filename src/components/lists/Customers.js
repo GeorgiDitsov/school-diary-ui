@@ -1,50 +1,53 @@
 import React from 'react'
 import { API_URL, CUSTOMERS_PATH } from '../../utils/url'
 import RequestService from '../../services/RequestService'
-import Customer from './items/Customer'
+import { CustomerColumnNames, CustomerRow } from './items/Customer'
 import { Spinner } from 'react-bootstrap'
 import List from '../List'
+import { withTranslation } from 'react-i18next'
 
 const API_CUSTOMERS_URL = API_URL + CUSTOMERS_PATH
 
 class Customers extends React.Component {
+    
     constructor() {
         super()
         this.state={
-            customer: {},
-            cutomers: [],
+            title: '',
+            customers: [],
             isLoading: true
         }
-        this.setCustomers = this.setCustomers.bind(this)
+        this.setContent = this.setContent.bind(this)
     }
 
     componentDidMount() {
+        const { t } = this.props
         RequestService.makeRequest(API_CUSTOMERS_URL).then(customers => {
-            this.setCustomers(customers)
-            this.setState(prevState => {
-                return {
-                    customer: customers[0],
-                    isLoading: !(prevState.isLoading)
-                }
-            })
+            this.setContent(t('customers'), customers)
         })
     }
 
-    setCustomers(customers) {
-        this.setState({
-            customers: customers.map(customer => (<Customer key={customer.id} customer={customer}/>))
+    setContent(title, customers) {
+        this.setState(prevState => {
+            return {
+                title: title,
+                customers: customers.map(customer => (<CustomerRow key={customer.id} customer={customer}/>)),
+                isLoading: !(prevState.isLoading)
+            }
         })
     }
 
     render() {
-        console.log(this.state.headers)
         if(this.state.isLoading) {
             return <Spinner animation='border'/>
         }
         return (
-            <List item={this.state.customer} rows={this.state.customers}/>
+            <React.Fragment>
+                <h1>{this.state.title}</h1>
+                <List columnNames={(<CustomerColumnNames/>)} rows={this.state.customers}/>
+            </React.Fragment>
         )
     }
 }
 
-export default Customers
+export default withTranslation()(Customers)

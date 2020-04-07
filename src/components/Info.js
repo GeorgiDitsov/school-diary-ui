@@ -26,9 +26,7 @@ class Info extends React.Component {
 
     render() {
         if(this.state.isLoading) {
-            return(
-                <Spinner animation='border'/>
-            )
+            return <Spinner animation='border'/>
         }
         return (
             <Jumbotron>

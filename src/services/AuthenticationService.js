@@ -2,29 +2,31 @@ import { API_URL, LOGIN_PATH } from '../utils/url'
 import httpRequest from '../utils/httpRequest'
 import { setTokenCookie } from '../utils/cookie'
 import cookie from 'react-cookies'
+import { TOKEN_COOKIE_NAME } from '../utils/constants'
 
 const API_LOGIN_URL = API_URL + LOGIN_PATH
 
 class AuthenticationService {
     
-    async attemptLogin(body) {
-        return await httpRequest.post(API_LOGIN_URL, body)
+    attemptLogin(body) {
+        httpRequest.post(API_LOGIN_URL, body)
             .then(response => {
                 if(response.ok) {
-                    response.json().then(data => {
-                        setTokenCookie(data)
-                        return true
-                    })
+                    response.json()
+                        .then(data => {
+                            setTokenCookie(data)
+                        })
                 } else {
-                    response.text().then(error => {
-                        throw new Error(error)
-                    })
+                    response.text()
+                        .then(error => {
+                             
+                        })
                 }
             })
     }
 
-    async attemptLogout() {
-        cookie.remove('token')
+    attemptLogout() {
+        cookie.remove(TOKEN_COOKIE_NAME)
         return true
     }
 

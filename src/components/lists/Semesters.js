@@ -1,9 +1,10 @@
 import React from 'react'
 import { API_URL, SEMESTERS_PATH } from '../../utils/url'
 import RequestService from '../../services/RequestService'
-import Semester from './items/Semester'
+import { SemesterRow, SemesterColumnNames } from './items/Semester'
 import { Spinner } from 'react-bootstrap'
 import List from '../List'
+import { withTranslation } from 'react-i18next'
 
 const API_SEMESTERS_URL = API_URL + SEMESTERS_PATH
 
@@ -12,28 +13,27 @@ class Semesters extends React.Component {
     constructor() {
         super()
         this.state={
-            semester: {},
+            title: '',
             semesters: [],
             isLoading: true
         }
-        this.setSemesters = this.setSemesters.bind(this)
+        this.setContent = this.setContent.bind(this)
     }
 
     componentDidMount() {
+        const {t} = this.props
         RequestService.makeRequest(API_SEMESTERS_URL).then(semesters => {
-            this.setSemesters(semesters);
-            this.setState(prevState => {
-                return {
-                    semester: semesters[0],
-                    isLoading: !(prevState.isLoading)
-                }
-            })
+            this.setContent(t('semesters'), semesters);
         })
     }
 
-    setSemesters(semesters) {
-        this.setState({
-            semesters: semesters.map(semester => <Semester key={semester.id} semester={semester}/>)
+    setContent(title, semesters) {
+        this.setState(prevState => {
+            return {
+                title: title,
+                semesters: semesters.map(semester => <SemesterRow key={semester.id} semester={semester}/>),
+                isLoading: !(prevState.isLoading)
+            }
         })
     }
 
@@ -42,9 +42,12 @@ class Semesters extends React.Component {
             return <Spinner animatio='border'/>
         }
         return (
-            <List item={this.state.semester} rows={this.state.semesters}/>
+            <React.Fragment>
+                <h1>{this.state.title}</h1>
+                <List columnNames={(<SemesterColumnNames/>)} rows={this.state.semesters}/>
+            </React.Fragment>
         )
     }
 }
 
-export default Semesters
+export default withTranslation()(Semesters)

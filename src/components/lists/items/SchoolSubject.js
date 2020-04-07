@@ -1,14 +1,23 @@
 import React from 'react'
-import ItemOptions from '../../buttons/ItemOptions'
+import AdminOptions from '../../buttons/AdminOptions'
+import { useTranslation } from 'react-i18next'
 
-function SchoolSubject(props) {
+export const SchoolSubjectColumnNames = () => {
+    const { t } = useTranslation()
+    return (
+        <React.Fragment>
+            <th>{t('id')}</th> 
+            <th>{t('school.subject')}</th> 
+        </React.Fragment>
+    )
+}
+
+export const SchoolSubjectRow = (props) => {
     return (
         <tr>
             <td>{props.subject.id}</td>
             <td>{props.subject.name}</td>
-            <ItemOptions id={props.subject.id}/>
+            <AdminOptions id={props.subject.id}/>
         </tr>
     )
 }
-
-export default SchoolSubject

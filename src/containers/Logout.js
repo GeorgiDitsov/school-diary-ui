@@ -1,13 +1,14 @@
 import React from 'react'
-import { useHistory } from 'react-router-dom'
 import AuthenticationService from '../services/AuthenticationService'
+import { Redirect } from 'react-router-dom'
+import { LOGIN_PATH } from '../utils/url'
 
 const Logout = () => {
-    const history = useHistory()
-    AuthenticationService.attemptLogout() && history.push()
-    return (
-        <React.Fragment/>
-    )
+    if(AuthenticationService.attemptLogout()) {
+        return (
+            <Redirect to={LOGIN_PATH}/>
+        )
+    }
 }
 
 export default Logout

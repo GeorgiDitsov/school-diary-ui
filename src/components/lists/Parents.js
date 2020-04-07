@@ -1,9 +1,10 @@
 import React from 'react'
 import { API_URL, PARENTS_PATH } from '../../utils/url'
 import RequestService from '../../services/RequestService'
-import Parent from './items/Parent'
+import { ParentRow, ParentColumnNames } from './items/Parent'
 import { Spinner } from 'react-bootstrap'
 import List from '../List'
+import { withTranslation } from 'react-i18next'
 
 const API_PARENTS_URL = API_URL + PARENTS_PATH
 
@@ -12,28 +13,28 @@ class Parents extends React.Component {
     constructor() {
         super()
         this.state={
-            parent: {},
+            title: '',
             parents: [],
             isLoading: true
         }
-        this.setParents = this.setParents.bind(this)
+        this.setContent = this.setContent.bind(this)
     }
 
     componentDidMount() {
-        RequestService.makeRequest(API_PARENTS_URL).then(parents => {
-            this.setParents(parents)
-            this.setState(prevState => {
-                return {
-                    parent: parents[0],
-                    isLoading: !(prevState.isLoading)
-                }
+        const { t } = this.props
+        RequestService.makeRequest(API_PARENTS_URL)
+            .then(parents => {
+                this.setContent(t('parents'), parents)
             })
-        })
     }
-
-    setParents(parents) {
-        this.setState({
-            parents: parents.map(parent => (<Parent key={parent.id} parent={parent}/>))
+    
+    setContent(title, parents) {
+        this.setState(prevState => {
+            return {
+                title: title,
+                parents: parents.map(parent => (<ParentRow key={parent.id} parent={parent}/>)),
+                isLoading: !(prevState.isLoading)
+            }
         })
     }
 
@@ -42,9 +43,12 @@ class Parents extends React.Component {
             return <Spinner animation='border'/>
         }
         return (
-            <List item={this.state.parent} rows={this.state.parents}/>
+            <React.Fragment>
+                <h1>{this.state.title}</h1>
+                <List columnNames={(<ParentColumnNames/>)} rows={this.state.parents}/>
+            </React.Fragment>
         )
     }
 }
 
-export default Parents
+export default  withTranslation()(Parents)

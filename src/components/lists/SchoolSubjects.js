@@ -1,9 +1,10 @@
 import React from 'react'
 import { API_URL, SCHOOL_SUBJECTS_PATH } from '../../utils/url'
 import RequestService from '../../services/RequestService'
-import SchoolSubject from './items/SchoolSubject'
+import { SchoolSubjectRow, SchoolSubjectColumnNames } from './items/SchoolSubject'
 import { Spinner } from 'react-bootstrap'
 import List from '../List'
+import { withTranslation } from 'react-i18next'
 
 const API_SCHOOL_SUBJECTS_URL = API_URL + SCHOOL_SUBJECTS_PATH
 
@@ -12,28 +13,27 @@ class SchoolSubjects extends React.Component {
     constructor() {
         super()
         this.state={
-            subject: {},
+            title: '',
             subjects: [],
             isLoading: true
         }
-        this.setSchoolSubjects = this.setSchoolSubjects.bind(this)
+        this.setContent = this.setContent.bind(this)
     }
 
     componentDidMount() {
+        const { t } = this.props
         RequestService.makeRequest(API_SCHOOL_SUBJECTS_URL).then(subjects => {
-            this.setSchoolSubjects(subjects)
-            this.setState(prevState => {
-                return {
-                    subject: subjects[0],
-                    isLoading: !(prevState.isLoading)
-                }
-            })
+            this.setContent(t('school.subjects'), subjects)
         })
     }
 
-    setSchoolSubjects(subjects) {
-        this.setState({
-            subjects: subjects.map(subject => (<SchoolSubject key={subject.id} subject={subject}/>))
+    setContent(title, subjects) {
+        this.setState(prevState => {
+            return {
+                title: title,
+                subjects: subjects.map(subject => (<SchoolSubjectRow key={subject.id} subject={subject}/>)),
+                isLoading: !(prevState.isLoading)
+            }
         })
     }
 
@@ -42,9 +42,12 @@ class SchoolSubjects extends React.Component {
             return <Spinner animation='border'/>
         }
         return (
-            <List item={this.state.subject} rows={this.state.subjects}/>
+            <React.Fragment>
+                <h1>{this.state.title}</h1>
+                <List columnNames={(<SchoolSubjectColumnNames/>)} rows={this.state.subjects}/>
+            </React.Fragment>
         )
     }
 }
 
-export default SchoolSubjects
+export default withTranslation()(SchoolSubjects)

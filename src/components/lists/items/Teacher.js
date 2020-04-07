@@ -1,7 +1,21 @@
 import React from 'react'
-import ItemOptions from '../../buttons/ItemOptions'
+import { useTranslation } from 'react-i18next'
+import AdminOptions from '../../buttons/AdminOptions'
 
-function Teacher(props) {
+export const TeacherColumnNames = () => {
+    const { t } = useTranslation()
+    return (
+        <React.Fragment>
+            <th>{t('id')}</th>
+            <th>{t('name')}</th>
+            <th>{t('pin')}</th>
+            <th>{t('school.subjects')}</th>
+            <th>{t('customer')}</th>
+        </React.Fragment>
+    )
+}
+
+export const TeacherRow = (props) => {
     return (
         <tr>
             <td>{props.teacher.id}</td>
@@ -13,9 +27,7 @@ function Teacher(props) {
                 })}
             </td>
             <td>{props.teacher.customer.username}</td>
-            <ItemOptions id={props.teacher.id}/>
+            <AdminOptions id={props.teacher.id}/>
         </tr>
     )
 }
-
-export default Teacher

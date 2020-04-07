@@ -1,9 +1,10 @@
 import React from 'react'
 import RequestService from '../../services/RequestService'
 import { API_URL, GROUPS_OF_STUDENTS_PATH } from '../../utils/url'
-import GroupOfStudents from './items/GroupOfStudents'
+import { GroupOfStudentsRow, GroupOfStudentsColumnNames } from './items/GroupOfStudents'
 import { Spinner } from 'react-bootstrap'
 import List from '../List'
+import { withTranslation } from 'react-i18next'
 
 const API_GROUPS_OF_STUDENTS_URL = API_URL + GROUPS_OF_STUDENTS_PATH
 
@@ -12,28 +13,27 @@ class GroupsOfStudents extends React.Component {
     constructor() {
         super()
         this.state={
-            group: {},
+            title: '',
             groups: [],
             isLoading: true
         }
-        this.setGroups = this.setGroups.bind(this)
+        this.setContent = this.setContent.bind(this)
     }
 
     componentDidMount() {
+        const { t } = this.props
         RequestService.makeRequest(API_GROUPS_OF_STUDENTS_URL).then(groups => {
-            this.setGroups(groups)
-            this.setState(prevState => {
-                return {
-                    group: groups[0],
-                    isLoading: !(prevState.isLoading)
-                }
-            })
+            this.setContent(t('classes'), groups)
         })
     }
-
-    setGroups(groups) {
-        this.setState({
-            groups: groups.map(group => (<GroupOfStudents key={group.id} group={group}/>))
+    
+    setContent(title, groups) {
+        this.setState(prevState => {
+            return {
+                title: title,
+                groups: groups.map(group => (<GroupOfStudentsRow key={group.id} group={group}/>)),
+                isLoading: !(prevState.isLoading)
+            }
         })
     }
 
@@ -42,9 +42,12 @@ class GroupsOfStudents extends React.Component {
             return <Spinner animation='border'/>
         }
         return (
-            <List item={this.state.group} rows={this.state.groups}/>
+            <React.Fragment>
+                <h1>{this.state.title}</h1>
+                <List columnNames={(<GroupOfStudentsColumnNames/>)} rows={this.state.groups}/>
+            </React.Fragment>
         )
     }
 }
 
-export default GroupsOfStudents
+export default withTranslation()(GroupsOfStudents)

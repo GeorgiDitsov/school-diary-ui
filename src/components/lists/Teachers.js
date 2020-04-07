@@ -1,9 +1,10 @@
 import React from 'react'
 import { API_URL, TEACHERS_PATH } from '../../utils/url'
 import RequestService from '../../services/RequestService'
-import Teacher from './items/Teacher'
+import { TeacherRow, TeacherColumnNames } from './items/Teacher'
 import { Spinner } from 'react-bootstrap'
 import List from '../List'
+import { withTranslation } from 'react-i18next'
 
 const API_TEACHERS_URL = API_URL + TEACHERS_PATH
 
@@ -16,24 +17,23 @@ class Teachers extends React.Component {
             teachers: [],
             isLoading: true
         }
-        this.setTeachers = this.setTeachers.bind(this)
+        this.setContent = this.setContent.bind(this)
     }
 
     componentDidMount() {
+        const { t } = this.props
         RequestService.makeRequest(API_TEACHERS_URL).then(teachers => {
-            this.setTeachers(teachers)
-            this.setState(prevState => {
-                return {
-                    teacher: teachers[0],
-                    isLoading: !(prevState.isLoading)
-                }
-            })
+            this.setContent(t('teachers'), teachers)
         })
     }
 
-    setTeachers(teachers) {
-        this.setState({
-            teachers: teachers.map(teacher => (<Teacher key={teacher.id} teacher={teacher}/>))
+    setContent(title, teachers) {
+        this.setState(prevState => {
+            return {
+                title: title,
+                teachers: teachers.map(teacher => (<TeacherRow key={teacher.id} teacher={teacher}/>)),
+                isLoading: !(prevState.isLoading)
+            }
         })
     }
 
@@ -42,9 +42,12 @@ class Teachers extends React.Component {
             return <Spinner animation='border'/>
         }
         return (
-            <List item={this.state.teacher} rows={this.state.teachers}/>
+            <React.Fragment>
+                <h1>{this.state.title}</h1>
+                <List columnNames={(<TeacherColumnNames/>)} rows={this.state.teachers}/>
+            </React.Fragment>
         )
     }
 }
 
-export default Teachers
+export default withTranslation()(Teachers)
