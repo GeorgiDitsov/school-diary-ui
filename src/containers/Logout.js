@@ -4,11 +4,9 @@ import { Redirect } from 'react-router-dom'
 import { LOGIN_PATH } from '../utils/url'
 
 const Logout = () => {
-    if(AuthenticationService.attemptLogout()) {
-        return (
-            <Redirect to={LOGIN_PATH}/>
-        )
-    }
+    return (
+        AuthenticationService.handleLogout() && <Redirect to={LOGIN_PATH}/>
+    )
 }
 
 export default Logout

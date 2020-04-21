@@ -9,7 +9,7 @@ class HttpRequest {
                 'Authorization': getTokenCookie().value 
             }
         }).catch(error => {
-            throw new Error(error)
+            alert(error)
         })
     }
 
@@ -22,7 +22,7 @@ class HttpRequest {
             },
             body: JSON.stringify(requestBody)
         }).catch(error => {
-            throw new Error(error)
+            alert(error)
         })
     }
 
@@ -35,7 +35,7 @@ class HttpRequest {
             },
             body: JSON.stringify(requestBody)
         }).catch(error => {
-            throw new Error(error)
+            alert(error)
         })
     }
 
@@ -48,7 +48,7 @@ class HttpRequest {
             },
             body: JSON.stringify(requestBody)
         }).catch(error => {
-            throw new Error(error)
+            alert(error)
         })
     }
 }

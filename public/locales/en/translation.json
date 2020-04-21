@@ -7,6 +7,8 @@
     "message": {
         "login": "Please, log in.",
         "welcome": "Welcome, {{username}}!",
+        "successful": "Request executed successfully",
+        "confirm":"Are you sure?",
         "add": {
             "customer": "Add new customer",
             "student": "Add new student",
@@ -46,11 +48,13 @@
                 "required": "Required field",
                 "customer": {
                     "username": "Username does not match the pattern",
-                    "password": "Password does not match the pattern"
+                    "password": "Password does not match the pattern",
+                    "email": "Email does not match the pattern"
                 }
             }
         }
     },
+    "notAvailable": "n/a",
     "username": "Username",
     "password": "Password",
     "role": "Role",
@@ -83,7 +87,7 @@
     "updated": "Updated",
     "begins": "Begins",
     "ends": "Ends",
-    "options": "Options",
+    "actions": "Actions",
     "add": "Add",
     "edit": "Edit",
     "delete": "Delete",

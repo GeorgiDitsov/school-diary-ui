@@ -5,12 +5,14 @@ import { ButtonGroup, Button } from 'react-bootstrap'
 const AdminOptions = (props) => {
     const { t } = useTranslation()
     return (
-        <td>
-            <ButtonGroup>
-                <Button variant='primary'>{t('edit')}</Button>
-                <Button variant='danger'>{t('delete')}</Button>
-            </ButtonGroup>
-        </td>
+        <React.Fragment>
+            <td>
+                <ButtonGroup>
+                    {props.onEdit !== undefined && <Button variant='primary' onClick={() => props.onEdit(props.item)}>{t('edit')}</Button>}
+                    {props.onDelete !== undefined && <Button variant='danger' onClick={() => props.onDelete(props.item.id)}>{t('delete')}</Button>}
+                </ButtonGroup>
+            </td>
+        </React.Fragment>
     )
 }
 

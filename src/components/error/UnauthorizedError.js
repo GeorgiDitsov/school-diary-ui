@@ -1,9 +1,9 @@
 import React from 'react'
 import { Alert } from 'react-bootstrap'
 
-function UnauthorizedError() {
+const UnauthorizedError = () => {
     return (
-        <Alert>
+        <Alert variant='danger'>
             <Alert.Heading>Error 401, unauthorized page.</Alert.Heading>
             <hr/>
             <p className="mb-0">

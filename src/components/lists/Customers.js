@@ -1,53 +1,36 @@
 import React from 'react'
-import { API_URL, CUSTOMERS_PATH } from '../../utils/url'
-import RequestService from '../../services/RequestService'
-import { CustomerColumnNames, CustomerRow } from './items/Customer'
-import { Spinner } from 'react-bootstrap'
+import { CustomerRow, CustomerColumnNames } from './items/Customer'
+import CustomerEdit from '../../containers/CustomerEdit'
 import List from '../List'
-import { withTranslation } from 'react-i18next'
 
-const API_CUSTOMERS_URL = API_URL + CUSTOMERS_PATH
+const Customers = (props) => {
 
-class Customers extends React.Component {
-    
-    constructor() {
-        super()
-        this.state={
-            title: '',
-            customers: [],
-            isLoading: true
-        }
-        this.setContent = this.setContent.bind(this)
+    const onEdit = (customer) => {
+        props.onEdit(customer)
     }
 
-    componentDidMount() {
-        const { t } = this.props
-        RequestService.makeRequest(API_CUSTOMERS_URL).then(customers => {
-            this.setContent(t('customers'), customers)
-        })
+    const handleCloseModal = () => {
+        props.handleCloseModal()
     }
 
-    setContent(title, customers) {
-        this.setState(prevState => {
-            return {
-                title: title,
-                customers: customers.map(customer => (<CustomerRow key={customer.id} customer={customer}/>)),
-                isLoading: !(prevState.isLoading)
+    const handleUpdate = (customer) => {
+        props.handleUpdate(customer)
+    }
+
+    let rows = props.customers.map(customer => 
+        <CustomerRow key={customer.id} customer={customer} onEdit={onEdit}/>)
+    return (
+        <React.Fragment>
+            {props.customer.id && 
+                <CustomerEdit 
+                    customer={props.customer} 
+                    handleCloseModal={handleCloseModal} 
+                    handleUpdate={handleUpdate}
+                />
             }
-        })
-    }
-
-    render() {
-        if(this.state.isLoading) {
-            return <Spinner animation='border'/>
-        }
-        return (
-            <React.Fragment>
-                <h1>{this.state.title}</h1>
-                <List columnNames={(<CustomerColumnNames/>)} rows={this.state.customers}/>
-            </React.Fragment>
-        )
-    }
+            <List columnNames={(<CustomerColumnNames/>)} rows={rows}/>
+        </React.Fragment>
+    )
 }
 
-export default withTranslation()(Customers)
+export default Customers

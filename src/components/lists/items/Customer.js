@@ -1,27 +1,31 @@
 import React from 'react'
-import AdminOptions from '../../buttons/AdminOptions'
-import { useTranslation } from 'react-i18next'
+import LocalizationContext from '../../../context/localization-context'
+import { Button } from 'react-bootstrap'
 
 export const CustomerColumnNames = () => {
-    const { t } = useTranslation()
+    const translate = React.useContext(LocalizationContext)
     return (
         <React.Fragment>
-            <th>{t('id')}</th>
-            <th>{t('name')}</th>
-            <th>{t('email')}</th>
-            <th>{t('role')}</th>
+            <th>{translate('id')}</th>
+            <th>{translate('name')}</th>
+            <th>{translate('email')}</th>
+            <th>{translate('role')}</th>
         </React.Fragment>
     )
 }
 
 export const CustomerRow = (props) => {
+    const translate = React.useContext(LocalizationContext)
+    const onEdit = (customer) => {
+        props.onEdit(customer)
+    }
     return (
         <tr>
             <td>{props.customer.id}</td>
             <td>{props.customer.username}</td>
             <td>{props.customer.email}</td>
             <td>{props.customer.role.name}</td>
-            <AdminOptions id={props.customer.id}/>
+            <td><Button variant='primary' onClick={() => onEdit(props.customer)}>{translate('edit')}</Button></td>
         </tr>
     )
 }

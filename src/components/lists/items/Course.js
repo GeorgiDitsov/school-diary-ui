@@ -20,7 +20,7 @@ export const CourseRow = (props) => {
             <td>{props.course.id}</td>
             <td>{props.course.group.view}</td>
             <td>{props.course.subject.name}</td>
-            <td>{props.course.teacher === null ? 'n/a' : props.course.teacher.name + ', ' + props.course.teacher.pin}</td>
+            <td>{props.course.teacher ? props.course.teacher.name + ', ' + props.course.teacher.pin : 'n/a'}</td>
             <AdminOptions id={props.course.id}/>
         </tr>
     )

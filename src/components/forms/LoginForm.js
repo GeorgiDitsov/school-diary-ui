@@ -1,9 +1,10 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { Form, Button } from 'react-bootstrap'
+import { Form } from 'react-bootstrap'
 import ErrorMessage from '../messages/ErrorMessage'
+import SubmitButton from '../buttons/SubmitButton'
 
-function LoginForm(props) {
+const LoginForm = (props) => {
     const { t } = useTranslation()
     return (
         <Form onSubmit={props.formik.handleSubmit}>
@@ -11,7 +12,6 @@ function LoginForm(props) {
             <Form.Group>
                 <Form.Control 
                     id='username' 
-                    name='username' 
                     type='text' 
                     value={props.formik.values.username} 
                     onChange={props.formik.handleChange} 
@@ -22,7 +22,6 @@ function LoginForm(props) {
             <Form.Group>
                 <Form.Control 
                     id='password' 
-                    name='password' 
                     type='password' 
                     value={props.formik.values.password} 
                     onChange={props.formik.handleChange} 
@@ -30,7 +29,7 @@ function LoginForm(props) {
                 />
                 <ErrorMessage error={props.formik.errors.password}/>
             </Form.Group>
-            <Button type='submit'>{t('submit')}</Button>
+            <SubmitButton/>
         </Form>
     )
 }

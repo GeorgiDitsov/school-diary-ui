@@ -3,8 +3,9 @@ import { useTranslation } from 'react-i18next'
 import { Row } from 'react-bootstrap'
 import { Formik } from 'formik'
 import LoginValidationSchema from '../validations/LoginFormValidation'
-import AuthenticationService from '../services/AuthenticationService'
+// import AuthenticationService from '../services/AuthenticationService'
 import LoginForm from '../components/forms/LoginForm'
+import AuthenticationService from '../services/AuthenticationService'
 
 
 const Login = () => {
@@ -18,7 +19,7 @@ const Login = () => {
                 }} 
                 validationSchema={LoginValidationSchema({ translate: t })}
                 onSubmit={values => {
-                    AuthenticationService.attemptLogin(values)
+                    AuthenticationService.handleLogin(values)
                 }}
             >
                 {props => (

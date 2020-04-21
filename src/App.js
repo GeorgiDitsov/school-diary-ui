@@ -1,62 +1,70 @@
 import React from 'react'
 import { getTokenCookie } from './utils/cookie'
-import { TokenContext } from './context/context'
+import jwt_decode from 'jwt-decode'
+import { useTranslation } from 'react-i18next'
+import LocalizationContext from './context/localization-context'
+import PrincipalContext from './context/principal-context'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import AuthenticatedRoute from './components/routes/AuthenticatedRoute'
-import { LOGIN_PATH, LOGOUT_PATH, HOME_PATH, INFO_PATH, INVALID_PATH, 
-  CUSTOMERS_PATH, STUDENTS_PATH, PARENTS_PATH, TEACHERS_PATH, SCHOOL_SUBJECTS_PATH, 
-  COURSES_PATH, GROUPS_OF_STUDENTS_PATH, SEMESTERS_PATH, GRADES_PATH, STUDENT_GRADES_PATH, PARENT_CHILDREN_PATH } from './utils/url'
+import AdminRoute from './components/routes/AdminRoute'
+import * as paths from './utils/url'
 import Login from './containers/Login'
 import Logout from './containers/Logout'
 import Home from './components/Home'
 import Info from './components/Info'
-import Customers from './components/lists/Customers'
-import Students from './components/lists/Students'
-import Parents from './components/lists/Parents'
-import Teachers from './components/lists/Teachers'
-import SchoolSubjects from './components/lists/SchoolSubjects'
-import Courses from './components/lists/Courses'
-import GroupsOfStudents from './components/lists/GroupsOfStudents'
-import Semesters from './components/lists/Semesters'
-import Grades from './components/lists/Grades'
+import CustomersPage from './components/pages/CustomersPage'
+import StudentsPage from './components/pages/StudentsPage'
+import ParentsPage from './components/pages/ParentsPage'
+import TeachersPage from './components/pages/TeachersPage'
+import SchoolSubjectsPage from './components/pages/SchoolSubjectsPage'
+import CoursesPage from './components/pages/CoursesPage'
+import GroupsOfStudentsPage from './components/pages/GroupsOfStudentsPage'
+import SemestersPage from './components/pages/SemestersPage'
+import GradesPage from './components/pages/GradesPage'
 import Children from './components/lists/Children'
 import NotFoundError from './components/error/NotFoundError'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
 
+let tokenValue = getTokenCookie().value
+
 class App extends React.Component {
-  
-  constructor() {
-    super()
-    this.state={
-      token: getTokenCookie()
-    }
+
+  state = {
+    principal: tokenValue ? jwt_decode(tokenValue) : undefined
+  }
+
+  translate = (code, parameter) => {
+    const { t: translate } = useTranslation()
+    return parameter ? translate(code, parameter) : translate(code)
   }
 
   render() {
     return (
-      <TokenContext.Provider value={this.state.token.value}>
-        <BrowserRouter>
-          <Switch>
-            <Route path={LOGIN_PATH} component={Login}/>
-            <AuthenticatedRoute path={LOGOUT_PATH} component={Logout}/>
-            <AuthenticatedRoute path={HOME_PATH} component={Home}/>
-            <AuthenticatedRoute path={INFO_PATH} component={Info}/>
-            <AuthenticatedRoute path={CUSTOMERS_PATH} component={Customers}/>
-            <AuthenticatedRoute path={STUDENTS_PATH} component={Students}/>
-            <AuthenticatedRoute path={PARENTS_PATH} component={Parents}/>
-            <AuthenticatedRoute path={TEACHERS_PATH} component={Teachers}/>
-            <AuthenticatedRoute path={SCHOOL_SUBJECTS_PATH} component={SchoolSubjects}/>
-            <AuthenticatedRoute path={COURSES_PATH} component={Courses}/>
-            <AuthenticatedRoute path={GROUPS_OF_STUDENTS_PATH} component={GroupsOfStudents}/>
-            <AuthenticatedRoute path={SEMESTERS_PATH} component={Semesters}/>
-            <AuthenticatedRoute path={GRADES_PATH} component={Grades}/>
-            <AuthenticatedRoute path={STUDENT_GRADES_PATH} component={Grades}/>
-            <AuthenticatedRoute path={PARENT_CHILDREN_PATH} component={Children}/>
-            <AuthenticatedRoute exact path={INVALID_PATH} component={NotFoundError}/>
-          </Switch>
-        </BrowserRouter>
-      </TokenContext.Provider>
+      <LocalizationContext.Provider value={this.translate}>
+        <PrincipalContext.Provider value={this.state.principal}>
+          <BrowserRouter>
+            <Switch>
+              <Route path={paths.LOGIN_PATH} component={Login}/>
+              <AuthenticatedRoute path={paths.LOGOUT_PATH} component={Logout}/>
+              <AuthenticatedRoute path={paths.HOME_PATH} component={Home}/>
+              <AuthenticatedRoute path={paths.INFO_PATH} component={Info}/>
+              <AdminRoute path={paths.CUSTOMERS_PATH} component={CustomersPage}/>
+              <AdminRoute path={paths.STUDENTS_PATH} component={StudentsPage}/>
+              <AdminRoute path={paths.PARENTS_PATH} component={ParentsPage}/>
+              <AdminRoute path={paths.TEACHERS_PATH} component={TeachersPage}/>
+              <AdminRoute path={paths.SCHOOL_SUBJECTS_PATH} component={SchoolSubjectsPage}/>
+              <AdminRoute path={paths.COURSES_PATH} component={CoursesPage}/>
+              <AdminRoute path={paths.GROUPS_OF_STUDENTS_PATH} component={GroupsOfStudentsPage}/>
+              <AdminRoute path={paths.SEMESTERS_PATH} component={SemestersPage}/>
+              <AdminRoute path={paths.GRADES_PATH} component={GradesPage}/>
+              <AuthenticatedRoute path={paths.STUDENT_GRADES_PATH} component={GradesPage}/>
+              <AuthenticatedRoute path={paths.PARENT_CHILDREN_PATH} component={Children}/>
+              <AuthenticatedRoute exact path={paths.INVALID_PATH} component={NotFoundError}/>
+            </Switch>
+          </BrowserRouter>
+        </PrincipalContext.Provider>
+      </LocalizationContext.Provider>
     )
   }
 }

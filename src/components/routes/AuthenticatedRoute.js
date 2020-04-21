@@ -1,28 +1,26 @@
 import React from 'react'
-import { TokenContext } from '../../context/context'
+import PrincipalContext from '../../context/principal-context'
+import LocalizationContext from '../../context/localization-context'
 import { Route, Redirect } from 'react-router-dom'
-import { LOGIN_PATH } from '../../utils/url'
 import Header from '../header/Header'
-import { Row, Container } from 'react-bootstrap'
+import { Container } from 'react-bootstrap'
+import { LOGIN_PATH } from '../../utils/url'
 
-function AuthenticatedRoute({ component: Component, ...rest }) {
-    const token = React.useContext(TokenContext)
+const AuthenticatedRoute = ({ component: Component, ...rest }) => {
+    const principal = React.useContext(PrincipalContext)
+    const translate = React.useContext(LocalizationContext)
     return (
         <Route {...rest}
-            render={
-                props =>
-                    token === undefined ?
-                    (<Redirect to={LOGIN_PATH}/>) :
-                    (
-                        <React.Fragment>
-                            <Header token={token}/>
-                            <Container className='my-5'>
-                                <Row className='justify-content-md-center'>
-                                    <Component component={props.component}/>
-                                </Row>
-                            </Container>
-                        </React.Fragment>
-                    )
+            render = {
+                props => principal ? 
+                    (<React.Fragment>
+                        <Header principal={principal} translate={translate}/>
+                        <Container className='justify-content-md-center my-5'>
+                            <Component component={props.component}/>
+                        </Container>
+                    </React.Fragment>) 
+                    : 
+                    (<Redirect to={LOGIN_PATH}/>)
             }
         >
         </Route>

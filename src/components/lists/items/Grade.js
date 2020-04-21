@@ -1,17 +1,17 @@
 import React from 'react'
-import { useTranslation } from 'react-i18next'
+import LocalizationContext from '../../../context/localization-context'
 
 export const GradeColumnNames = () => {
-    const { t } = useTranslation()
+    const translate = React.useContext(LocalizationContext)
     return (
         <React.Fragment>
-            <th>{t('id')}</th>
-            <th>{t('grade')}</th>
-            <th>{t('inserted')}</th>
-            <th>{t('updated')}</th>
-            <th>{t('student')}</th>
-            <th>{t('school.subject')}</th>
-            <th>{t('teacher')}</th>
+            <th>{translate('id')}</th>
+            <th>{translate('grade')}</th>
+            <th>{translate('inserted')}</th>
+            <th>{translate('updated')}</th>
+            <th>{translate('student')}</th>
+            <th>{translate('school.subject')}</th>
+            <th>{translate('teacher')}</th>
         </React.Fragment>
     )
 }

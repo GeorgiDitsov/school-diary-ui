@@ -1,15 +1,15 @@
 import React from 'react'
+import LocalizationContext from '../context/localization-context'
 import { Table } from 'react-bootstrap'
-import { useTranslation } from 'react-i18next'
 
 const List = (props) => {
-    const { t } = useTranslation()
+    const translate = React.useContext(LocalizationContext)
     return ( 
         <Table striped bordered responsive>
             <thead className='thead-dark'>
                 <tr>
                     {props.columnNames}
-                    <th>{t('options')}</th>
+                    <th>{translate('actions')}</th>
                 </tr>
             </thead>
             <tbody>

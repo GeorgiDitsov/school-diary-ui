@@ -17,6 +17,15 @@ export const StudentColumnNames = () => {
 }
 
 export const StudentRow = (props) => {
+
+    const onEdit = (customer) => {
+        props.onEdit(customer)
+    }
+
+    const onDelete = (studentId) => {
+        props.onDelete(studentId)
+    }
+
     return (
         <tr>
             <td>{props.student.id}</td>
@@ -31,7 +40,7 @@ export const StudentRow = (props) => {
                 })}
             </td>
             <td>{props.student.customer.username}</td>
-            <AdminOptions id={props.student.id}/>
+            <AdminOptions item={props.student} onEdit={onEdit} onDelete={onDelete}/>
         </tr>
     )
 }

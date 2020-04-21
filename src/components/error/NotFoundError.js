@@ -1,7 +1,7 @@
 import React from 'react'
 import { Alert } from 'react-bootstrap'
 
-function NotFoundError() {
+const NotFoundError = () => {
     return (
         <Alert variant="danger">
             <Alert.Heading>Error 404, page not found.</Alert.Heading>

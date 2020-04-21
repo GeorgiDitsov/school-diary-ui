@@ -15,9 +15,9 @@ export const SchoolSubjectColumnNames = () => {
 export const SchoolSubjectRow = (props) => {
     return (
         <tr>
-            <td>{props.subject.id}</td>
-            <td>{props.subject.name}</td>
-            <AdminOptions id={props.subject.id}/>
+            <td>{props.schoolSubject.id}</td>
+            <td>{props.schoolSubject.name}</td>
+            <AdminOptions id={props.schoolSubject.id}/>
         </tr>
     )
 }

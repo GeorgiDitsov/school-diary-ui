@@ -1,0 +1,102 @@
+{
+    "school": {
+        "diary": "Schultagebuch",
+        "subject": "Schulfach",
+        "subjects": "Schulf\\u00e4cher"
+    },
+    "message": {
+        "login": "Bitte, einloggen.",
+        "welcome": "Willkommen, {{username}}!",
+        "successful": "Anfrage erfolgreich ausgef\\u00fchrt",
+        "confirm":"Bist du sicher?",
+        "add": {
+            "customer": "Benutzer hinzuf\\u00fcgen",
+            "student": "Sch\\u00fcler/Sch\\u00fclerin hinzuf\\u00fcgen",
+            "parent": "Elternteil hinzuf\\u00fcgen",
+            "teacher": "Lehrer/Lehrerin hinzuf\\u00fcgen",
+            "subject": "Schulfach hinzuf\\u00fcgen",
+            "course": "Schulstunde hinzuf\\u00fcgen",
+            "class": "Klasse hinzuf\\u00fcgen",
+            "semester": "Semester hinzuf\\u00fcgen",
+            "grade": "Note hinzuf\\u00fcgen"
+        },
+        "edit": {
+            "customer": "Bearbeiten Benutzer mit id",
+            "student": "Bearbeiten Sch\\u00fcler/Sch\\u00fclerin mit id",
+            "parent": "Bearbeiten Elternteil mit id",
+            "teacher": "Bearbeiten Lehrer/Lehrerin mit id",
+            "subject": "Bearbeiten Schulfach mit id",
+            "course": "Bearbeiten Schulstunde mit id",
+            "class": "Bearbeiten Klasse mit id",
+            "semester": "Bearbeiten Semester mit id",
+            "grade": "Bearbeiten Note mit id"
+        },
+        "error": {
+            "400": {
+                "title": "Fehler 400: Ung\\u00fcltige Anforderung",
+                "body": "Ung\\u00fcltige Anforderung an die API gesendet."
+            },
+            "401": {
+                "title": "Fehler 401: Nicht autorisiert",
+                "body": "Entschuldigen Sie, dass Sie gest\\u00f6rt wurden, aber Sie haben keinen Zugriff auf diese Seite."
+            },
+            "404": {
+                "title": "Fehler 404: Nicht gefunden",
+                "body": "Entschuldigen Sie, dass Sie gest\\u00f6rt wurden, aber Sie sind verloren."
+            },
+            "validation": {
+                "required": "Pflichtfeld",
+                "customer": {
+                    "username": "Der Benutzername stimmt nicht mit dem Muster \\u00fcberein",
+                    "password": "Das Passwort stimmt nicht mit dem Muster \\u00fcberein",
+                    "email": "E-Mail stimmt nicht mit dem Muster \\u00fcberein"
+                }
+            }
+        }
+    },
+    "notAvailable": "n/a",
+    "username": "Benutzername",
+    "password": "Passwort",
+    "role": "Rolle",
+    "info": "Info",
+    "login": "Einloggen",
+    "logout": "Ausloggen",
+    "id": "Id",
+    "name": "Name",
+    "pin": "PIN",
+    "email": "E-Mail",
+    "customer": "Benutzer",
+    "student": "Sch\\u00fcler/Sch\\u00fclerin",
+    "parent": "Eltenteil",
+    "teacher": "Lehrer/Lehrerin",
+    "course": "Schulstunde",
+    "class": "Klasse",
+    "semester": "Semester",
+    "grade": "Note",
+    "customers": "Benutzer",
+    "students": "Sch\\u00fclern",
+    "parents": "Eltern",
+    "teachers": "Lehrern",
+    "courses": "Schulstunden",
+    "classes": "Klassen",
+    "semesters": "Semester",
+    "grades": "Noten",
+    "child": "Kind",
+    "children": "Kinder",
+    "inserted": "Eingef\\u00fcgt",
+    "updated": "Aktualisiert",
+    "begins": "Semesterbeginn",
+    "ends": "Semesterende",
+    "actions": "Aktionen",
+    "add": "Hinzuf\\u00fcgen",
+    "edit": "Bearbeiten",
+    "delete": "L\\u00f6schen",
+    "submit": "Einreichen",
+    "close": "Verschlie\\u00dfen",
+    "my": {
+        "grades": "Meine Noten",
+        "children": "Meine kinder",
+        "courses": "Meine schulstunden"
+    }
+    
+}
