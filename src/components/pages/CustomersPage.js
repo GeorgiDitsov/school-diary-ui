@@ -1,7 +1,8 @@
 import React from 'react'
+import * as empty from '../../utils/empty-objects'
 import { API_URL, CUSTOMERS_PATH } from '../../utils/url'
 import RequestService from '../../services/RequestService'
-import { Spinner, Row } from 'react-bootstrap'
+import { Spinner } from 'react-bootstrap'
 import Customers from '../lists/Customers'
 import { withTranslation } from 'react-i18next'
 
@@ -9,8 +10,7 @@ class CustomersPage extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            title: '',
-            customer: {},
+            customer: empty.customer,
             customers: [],
             url: API_URL + CUSTOMERS_PATH,
             isLoading: true
@@ -26,11 +26,9 @@ class CustomersPage extends React.Component {
     }
     
     setContent() {
-        const { t: translate } = this.props
         RequestService.getData(this.state.url)
             .then(customers => {
                 this.setState({
-                    title: translate('customers'),
                     customers,
                     isLoading: false
                 })
@@ -45,23 +43,21 @@ class CustomersPage extends React.Component {
 
     handleCloseModal() {
         this.setState({
-            customer: {},
+            customer: empty.customer,
         })
     }
 
     handleUpdate(customer) {
         RequestService.update(API_URL + CUSTOMERS_PATH + '/' + customer.id, customer)
             .then(updatedCustomer => {
-                this.setState(prevState => {
-                    return {
-                        customer: {},
-                        customers: prevState.customers.map(customer => {
+                this.setState({
+                        customer: empty.customer,
+                        customers: [...this.state.customers].map(customer => {
                             if (customer.id === updatedCustomer.id) {
                                 return updatedCustomer
                             }
                             return customer
                         })
-                    }
                 })
             })
     }
@@ -70,11 +66,10 @@ class CustomersPage extends React.Component {
         if (this.state.isLoading) {
             return <Spinner animation='border'/>
         }
+        const { t: translate } = this.props
         return (
             <React.Fragment>
-                <Row className='justify-content-md-center'>
-                    <h1>{this.state.title}</h1>
-                </Row>
+                <h1>{translate('customers')}</h1>
                 <Customers 
                     customer={this.state.customer} 
                     customers={this.state.customers} 

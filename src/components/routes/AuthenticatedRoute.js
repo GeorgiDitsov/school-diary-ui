@@ -12,18 +12,17 @@ const AuthenticatedRoute = ({ component: Component, ...rest }) => {
     return (
         <Route {...rest}
             render = {
-                props => principal ? 
-                    (<React.Fragment>
+                props => principal ?
+                    <React.Fragment>
                         <Header principal={principal} translate={translate}/>
                         <Container className='justify-content-md-center my-5'>
                             <Component component={props.component}/>
                         </Container>
-                    </React.Fragment>) 
-                    : 
-                    (<Redirect to={LOGIN_PATH}/>)
+                    </React.Fragment>
+                    :
+                    <Redirect to={LOGIN_PATH}/>
             }
-        >
-        </Route>
+        />
     )
 }
 

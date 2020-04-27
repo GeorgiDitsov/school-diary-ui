@@ -36,14 +36,14 @@ class RequestService {
     }
 
     async delete(url, requestBody) {
-        return await httpRequest.delete(url, requestBody)
+        let isSuccessful = false
+        await httpRequest.delete(url, requestBody)
             .then(response => {
                 if (response.ok) {
-                    return true
-                } else {
-                    return false
+                    isSuccessful = true
                 }
             })
+        return isSuccessful
     }
 }
 

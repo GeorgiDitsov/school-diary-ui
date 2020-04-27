@@ -1,27 +1,37 @@
 import React from 'react'
-import { useTranslation } from 'react-i18next'
+import LocalizationContext from '../../../context/localization-context'
 import AdminOptions from '../../buttons/AdminOptions'
 
 export const ParentColumnNames = () => {
-    const { t } = useTranslation()
+    const translate = React.useContext(LocalizationContext)
     return (
         <React.Fragment>
-            <th>{t('id')}</th>
-            <th>{t('name')}</th>
-            <th>{t('pin')}</th>
-            <th>{t('customer')}</th>
+            <th>{translate('id')}</th>
+            <th>{translate('name')}</th>
+            <th>{translate('pin')}</th>
+            <th>{translate('customer')}</th>
         </React.Fragment>
     )
 }
 
 export const ParentRow = (props) => {
+    const onEdit = (parent) => {
+        props.onEdit(parent)
+    }
+    const onDelete = (parentId) => {
+        props.onDelete(parentId)
+    }
     return (
         <tr>
             <td>{props.parent.id}</td>
             <td>{props.parent.name}</td>
             <td>{props.parent.pin}</td>
             <td>{props.parent.customer.username}</td>
-            <AdminOptions id={props.parent.id}/>
+            <AdminOptions 
+                item={props.parent} 
+                onEdit={onEdit} 
+                onDelete={onDelete}
+            />
         </tr>
     )
 }

@@ -1,12 +1,11 @@
 import React from 'react'
-import { useTranslation } from 'react-i18next'
+import LocalizationContext from '../../context/localization-context'
 import { Form } from 'react-bootstrap'
-import ErrorMessage from '../messages/ErrorMessage'
-import { getIn } from 'formik'
+import { ErrorMessage } from 'formik'
 import SubmitButton from '../buttons/SubmitButton'
 
 const CustomerEditForm = (props) => {
-    const { t } = useTranslation()
+    const translate = React.useContext(LocalizationContext)
     return (
         <Form onSubmit={props.formik.handleSubmit}>
             <Form.Group>
@@ -15,9 +14,9 @@ const CustomerEditForm = (props) => {
                     type='text' 
                     value={props.formik.values.customer.username} 
                     onChange={props.formik.handleChange} 
-                    placeholder={t('username')}
+                    placeholder={translate('username')}
                 />
-                <ErrorMessage error={getIn(props.formik.errors, 'customer.username')}/>
+                <ErrorMessage component='div' className='error' name='customer.username'/>
             </Form.Group>
             <Form.Group>
                 <Form.Control 
@@ -25,9 +24,9 @@ const CustomerEditForm = (props) => {
                     type='password' 
                     value={props.formik.values.customer.password} 
                     onChange={props.formik.handleChange} 
-                    placeholder={t('password')}
+                    placeholder={translate('password')}
                 />
-                <ErrorMessage error={getIn(props.formik.errors, 'customer.password')}/>
+                <ErrorMessage component='div' className='error' name='customer.password'/>
             </Form.Group>
             <Form.Group>
                 <Form.Control 
@@ -35,9 +34,9 @@ const CustomerEditForm = (props) => {
                     type='text' 
                     value={props.formik.values.customer.email} 
                     onChange={props.formik.handleChange} 
-                    placeholder={t('email')}
+                    placeholder={translate('email')}
                 />
-                <ErrorMessage error={getIn(props.formik.errors, 'customer.email')}/>
+                <ErrorMessage component='div' className='error' name='customer.email'/>
             </Form.Group>
             <SubmitButton/>
         </Form>

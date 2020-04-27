@@ -22,9 +22,13 @@ import GroupsOfStudentsPage from './components/pages/GroupsOfStudentsPage'
 import SemestersPage from './components/pages/SemestersPage'
 import GradesPage from './components/pages/GradesPage'
 import Children from './components/lists/Children'
+import TeacherCoursesPage from './components/pages/TeacherCoursesPage'
 import NotFoundError from './components/error/NotFoundError'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
+import StudentRoute from './components/routes/StudentRoute'
+import ParentRoute from './components/routes/ParentRoute'
+import TeacherRoute from './components/routes/TeacherRoute'
 
 let tokenValue = getTokenCookie().value
 
@@ -53,13 +57,18 @@ class App extends React.Component {
               <AdminRoute path={paths.STUDENTS_PATH} component={StudentsPage}/>
               <AdminRoute path={paths.PARENTS_PATH} component={ParentsPage}/>
               <AdminRoute path={paths.TEACHERS_PATH} component={TeachersPage}/>
-              <AdminRoute path={paths.SCHOOL_SUBJECTS_PATH} component={SchoolSubjectsPage}/>
               <AdminRoute path={paths.COURSES_PATH} component={CoursesPage}/>
+              <AdminRoute path={paths.SCHOOL_SUBJECTS_PATH} component={SchoolSubjectsPage}/>
               <AdminRoute path={paths.GROUPS_OF_STUDENTS_PATH} component={GroupsOfStudentsPage}/>
               <AdminRoute path={paths.SEMESTERS_PATH} component={SemestersPage}/>
               <AdminRoute path={paths.GRADES_PATH} component={GradesPage}/>
-              <AuthenticatedRoute path={paths.STUDENT_GRADES_PATH} component={GradesPage}/>
-              <AuthenticatedRoute path={paths.PARENT_CHILDREN_PATH} component={Children}/>
+              <StudentRoute path={paths.STUDENT_GRADES_PATH} component={GradesPage}/>
+              <ParentRoute path={paths.PARENT_CHILDREN_PATH} component={Children}/>
+              <TeacherRoute exact path={paths.TEACHER_COURSES_PATH} component={TeacherCoursesPage}/>
+              <TeacherRoute 
+                path={paths.TEACHER_COURSES_PATH + '/:courseId' + paths.STUDENTS_PATH + '/:studentId'} 
+                component={GradesPage}
+              />
               <AuthenticatedRoute exact path={paths.INVALID_PATH} component={NotFoundError}/>
             </Switch>
           </BrowserRouter>

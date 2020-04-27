@@ -4,8 +4,8 @@ import { Table } from 'react-bootstrap'
 
 const List = (props) => {
     const translate = React.useContext(LocalizationContext)
-    return ( 
-        <Table striped bordered responsive>
+    return (
+        <Table bordered striped responsive>
             <thead className='thead-dark'>
                 <tr>
                     {props.columnNames}

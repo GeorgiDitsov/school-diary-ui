@@ -46,10 +46,27 @@
             },
             "validation": {
                 "required": "Pflichtfeld",
+                "select": {
+                    "min": "W\\u00e4hlen Sie mindestens eine aus",
+                    "max": "W\\u00e4hlen Sie maximal zwei aus"
+                },
                 "customer": {
                     "username": "Der Benutzername stimmt nicht mit dem Muster \\u00fcberein",
                     "password": "Das Passwort stimmt nicht mit dem Muster \\u00fcberein",
                     "email": "E-Mail stimmt nicht mit dem Muster \\u00fcberein"
+                },
+                "person": {
+                    "name": "Falsch Name",
+                    "pin": "Falsch PIN"
+                },
+                "class": {
+                    "name": "Falsch Klasse Name"
+                },
+                "subject": {
+                    "name": "Falsch Schulfach Name"
+                },
+                "grade": {
+                    "value": "Der Wert der Note muss zwischen 2 und 6 liegen"
                 }
             }
         }

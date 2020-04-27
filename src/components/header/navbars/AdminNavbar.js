@@ -1,22 +1,22 @@
 import React from 'react'
-import { useTranslation } from 'react-i18next'
+import LocalizationContext from '../../../context/localization-context'
 import { Nav } from 'react-bootstrap'
 import { CUSTOMERS_PATH, STUDENTS_PATH, PARENTS_PATH, TEACHERS_PATH, SCHOOL_SUBJECTS_PATH, 
     COURSES_PATH, GROUPS_OF_STUDENTS_PATH, SEMESTERS_PATH, GRADES_PATH } from '../../../utils/url'
 
 const AdminNavbar = () => {
-    const { t } = useTranslation()
+    const translate = React.useContext(LocalizationContext)
     return (
         <Nav className='mr-auto'>
-            <Nav.Link href={CUSTOMERS_PATH}>{t('customer')}</Nav.Link>
-            <Nav.Link href={STUDENTS_PATH}>{t('student')}</Nav.Link>
-            <Nav.Link href={PARENTS_PATH}>{t('parent')}</Nav.Link>
-            <Nav.Link href={TEACHERS_PATH}>{t('teacher')}</Nav.Link>
-            <Nav.Link href={SCHOOL_SUBJECTS_PATH}>{t('school.subject')}</Nav.Link>
-            <Nav.Link href={COURSES_PATH}>{t('course')}</Nav.Link>
-            <Nav.Link href={GROUPS_OF_STUDENTS_PATH}>{t('class')}</Nav.Link>
-            <Nav.Link href={SEMESTERS_PATH}>{t('semester')}</Nav.Link>
-            <Nav.Link href={GRADES_PATH}>{t('grade')}</Nav.Link>
+            <Nav.Link href={CUSTOMERS_PATH}>{translate('customer')}</Nav.Link>
+            <Nav.Link href={STUDENTS_PATH}>{translate('student')}</Nav.Link>
+            <Nav.Link href={PARENTS_PATH}>{translate('parent')}</Nav.Link>
+            <Nav.Link href={TEACHERS_PATH}>{translate('teacher')}</Nav.Link>
+            <Nav.Link href={COURSES_PATH}>{translate('course')}</Nav.Link>
+            <Nav.Link href={SCHOOL_SUBJECTS_PATH}>{translate('school.subject')}</Nav.Link>
+            <Nav.Link href={GROUPS_OF_STUDENTS_PATH}>{translate('class')}</Nav.Link>
+            <Nav.Link href={SEMESTERS_PATH}>{translate('semester')}</Nav.Link>
+            <Nav.Link href={GRADES_PATH}>{translate('grade')}</Nav.Link>
         </Nav>
     )
 }

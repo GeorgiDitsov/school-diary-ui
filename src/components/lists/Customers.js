@@ -4,19 +4,15 @@ import CustomerEdit from '../../containers/CustomerEdit'
 import List from '../List'
 
 const Customers = (props) => {
-
     const onEdit = (customer) => {
         props.onEdit(customer)
     }
-
     const handleCloseModal = () => {
         props.handleCloseModal()
     }
-
     const handleUpdate = (customer) => {
         props.handleUpdate(customer)
     }
-
     let rows = props.customers.map(customer => 
         <CustomerRow key={customer.id} customer={customer} onEdit={onEdit}/>)
     return (

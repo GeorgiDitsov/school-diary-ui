@@ -24,7 +24,7 @@ export const GradeRow = (props) => {
             <td>{props.grade.inserted}</td>
             <td>{props.grade.updated}</td>
             <td>{props.grade.student.name + ', ' + props.grade.student.pin}</td>
-            <td>{props.grade.course.subject.name}</td>
+            <td>{props.grade.course.schoolSubject.name}</td>
             <td>{props.grade.course.teacher.name + ', ' + props.grade.course.teacher.pin}</td>
             <td/>
         </tr>

@@ -1,23 +1,23 @@
 import React from 'react'
-import { useTranslation } from 'react-i18next'
+import LocalizationContext from '../../context/localization-context'
 import { Form } from 'react-bootstrap'
-import ErrorMessage from '../messages/ErrorMessage'
+import { ErrorMessage } from 'formik'
 import SubmitButton from '../buttons/SubmitButton'
 
 const LoginForm = (props) => {
-    const { t } = useTranslation()
+    const translate = React.useContext(LocalizationContext)
     return (
         <Form onSubmit={props.formik.handleSubmit}>
-            <h3>{t('message.login')}</h3>
+            <h3>{translate('message.login')}</h3>
             <Form.Group>
                 <Form.Control 
                     id='username' 
                     type='text' 
                     value={props.formik.values.username} 
                     onChange={props.formik.handleChange} 
-                    placeholder={t('username')}
+                    placeholder={translate('username')}
                 />
-                <ErrorMessage error={props.formik.errors.username}/>
+                <ErrorMessage component='div' className='error' name='username'/>
             </Form.Group>
             <Form.Group>
                 <Form.Control 
@@ -25,9 +25,9 @@ const LoginForm = (props) => {
                     type='password' 
                     value={props.formik.values.password} 
                     onChange={props.formik.handleChange} 
-                    placeholder={t('password')}
+                    placeholder={translate('password')}
                 />
-                <ErrorMessage error={props.formik.errors.password}/>
+                <ErrorMessage component='div' className='error' name='password'/>
             </Form.Group>
             <SubmitButton/>
         </Form>

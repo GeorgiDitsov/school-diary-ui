@@ -1,23 +1,33 @@
 import React from 'react'
+import LocalizationContext from '../../../context/localization-context'
 import AdminOptions from '../../buttons/AdminOptions'
-import { useTranslation } from 'react-i18next'
 
 export const SchoolSubjectColumnNames = () => {
-    const { t } = useTranslation()
+    const translate = React.useContext(LocalizationContext)
     return (
         <React.Fragment>
-            <th>{t('id')}</th> 
-            <th>{t('school.subject')}</th> 
+            <th>{translate('id')}</th> 
+            <th>{translate('school.subject')}</th> 
         </React.Fragment>
     )
 }
 
 export const SchoolSubjectRow = (props) => {
+    const onEdit = (schoolSubject) => {
+        props.onEdit(schoolSubject)
+    }
+    const onDelete = (schoolSubjectId) => {
+        props.onDelete(schoolSubjectId)
+    }
     return (
         <tr>
             <td>{props.schoolSubject.id}</td>
             <td>{props.schoolSubject.name}</td>
-            <AdminOptions id={props.schoolSubject.id}/>
+            <AdminOptions 
+                item={props.schoolSubject} 
+                onEdit={onEdit} 
+                onDelete={onDelete}
+            />
         </tr>
     )
 }

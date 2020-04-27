@@ -1,18 +1,22 @@
 import React from 'react'
-import { useTranslation } from 'react-i18next'
+import LocalizationContext from '../../context/localization-context'
 import { ButtonGroup, Button } from 'react-bootstrap'
 
-const AdminOptions = (props) => {
-    const { t } = useTranslation()
+const AdminOptions = ({ item, onEdit, onDelete }) => {
+    const translate = React.useContext(LocalizationContext)
     return (
-        <React.Fragment>
-            <td>
-                <ButtonGroup>
-                    {props.onEdit !== undefined && <Button variant='primary' onClick={() => props.onEdit(props.item)}>{t('edit')}</Button>}
-                    {props.onDelete !== undefined && <Button variant='danger' onClick={() => props.onDelete(props.item.id)}>{t('delete')}</Button>}
-                </ButtonGroup>
-            </td>
-        </React.Fragment>
+        <td>
+            <ButtonGroup>
+                {onEdit && 
+                    <Button variant='primary' onClick={() => onEdit(item)}>
+                        {translate('edit')}
+                    </Button>}
+                {onDelete && 
+                    <Button variant='danger' onClick={() => onDelete(item.id)}>
+                        {translate('delete')}
+                    </Button>}
+            </ButtonGroup>
+        </td>
     )
 }
 

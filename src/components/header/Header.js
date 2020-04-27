@@ -26,12 +26,12 @@ const Header = (props) => {
                     {props.principal.role === ROLE_STUDENT && (<StudentNavbar/>)}
                     {props.principal.role === ROLE_TEACHER && (<TeacherNavbar/>)}
                     {props.principal.role === ROLE_PARENT && (<ParentNavbar/>)}
-                    <NavDropdown title={props.principal.username} alignRight>
-                        <NavDropdown.Item href={INFO_PATH}>{props.translate('info')}</NavDropdown.Item>
-                        <NavDropdown.Divider/>
-                        <NavDropdown.Item href={LOGOUT_PATH}>{props.translate('logout')}</NavDropdown.Item>
-                    </NavDropdown>
                 </Navbar.Collapse>
+                <NavDropdown title={props.principal.username} alignRight>
+                    <NavDropdown.Item href={INFO_PATH}>{props.translate('info')}</NavDropdown.Item>
+                    <NavDropdown.Divider/>
+                    <NavDropdown.Item href={LOGOUT_PATH}>{props.translate('logout')}</NavDropdown.Item>
+                </NavDropdown>
             </Navbar>
         )
 }

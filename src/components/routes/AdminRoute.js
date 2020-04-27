@@ -15,17 +15,16 @@ const AdminRoute = ({component: Component, ...rest}) => {
             render = {
                 props => 
                     (principal && principal.role === ROLE_ADMIN) ? 
-                        (<React.Fragment>
+                        <React.Fragment>
                             <Header principal={principal} translate={translate}/>
                             <Container className='justify-content-md-center my-5'>
                                 <Component component={props.component}/>
                             </Container>
-                        </React.Fragment>) 
+                        </React.Fragment>
                         : 
-                        (<UnauthorizedError/>)
+                        <UnauthorizedError/>
             }
-        >
-        </Route>
+        />
     )
 }
 

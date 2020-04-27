@@ -46,10 +46,27 @@
             },
             "validation": {
                 "required": "Required field",
+                "select": {
+                    "min": "Select at least one",
+                    "max": "Select maximum of two"
+                },
                 "customer": {
                     "username": "Username does not match the pattern",
                     "password": "Password does not match the pattern",
                     "email": "Email does not match the pattern"
+                },
+                "person": {
+                    "name": "Name of the person does not match the pattern",
+                    "pin": "PIN of the person does not match the pattern"
+                },
+                "class": {
+                    "name": "Invalid name of the class"
+                },
+                "subject": {
+                    "name": "Invalid name of the school subject"
+                },
+                "grade": {
+                    "value": "Value of the grade has to be between 2 and 6"
                 }
             }
         }
