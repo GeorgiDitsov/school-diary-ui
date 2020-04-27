@@ -1,10 +1,10 @@
 import React from 'react'
 import { Button } from 'react-bootstrap'
 
-const CreateButton = (props) => {
+const CreateButton = ({ buttonText, onCreate }) => {
     return (
-        <Button className='float-right' variant='success' onClick={() => props.onCreate()}>
-            {props.buttonText}
+        <Button className='float-right' variant='success' onClick={() => onCreate()}>
+            {buttonText}
         </Button>
     )
 }
