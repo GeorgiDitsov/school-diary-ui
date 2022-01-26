@@ -1,19 +1,25 @@
-import React from 'react'
-import LocalizationContext from '../context/localization-context'
-import PrincipalContext from '../context/principal-context'
-import { Container, Row, Jumbotron } from 'react-bootstrap'
+import React, { useContext, useState } from "react";
+import LocalizationContext from "../contexts/localization-context";
+import PrincipalContext from "../contexts/principal-context";
+import { Container, Row, Jumbotron } from "react-bootstrap";
 
 const Home = () => {
-    const translate = React.useContext(LocalizationContext)
-    const principal = React.useContext(PrincipalContext)
-    const [title] = React.useState(translate('message.welcome', {username: principal.username}))
-    return (
-        <Container className='my-5'>
-            <Row className='justify-content-md-center'>
-                {(<Jumbotron><h1>{title}</h1></Jumbotron>)}
-            </Row>
-        </Container>
-    )
-}
+  const translate = useContext(LocalizationContext);
+  const principal = useContext(PrincipalContext);
 
-export default Home
+  const [title] = useState(
+    translate("message.welcome", { username: principal.username })
+  );
+
+  return (
+    <Container className="my-5">
+      <Row className="justify-content-md-center">
+        <Jumbotron>
+          <h1>{title}</h1>
+        </Jumbotron>
+      </Row>
+    </Container>
+  );
+};
+
+export default Home;

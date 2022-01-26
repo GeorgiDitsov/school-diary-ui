@@ -1,12 +1,17 @@
-import React from 'react'
-import { Button } from 'react-bootstrap'
+import React from "react";
+import { Button } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
-const CreateButton = ({ buttonText, onCreate }) => {
-    return (
-        <Button className='float-right' variant='success' onClick={() => onCreate()}>
-            {buttonText}
-        </Button>
-    )
+export default function CreateButton({ onCreate }) {
+  return (
+    <Button
+      className="float-right"
+      size="sm"
+      variant="success"
+      onClick={onCreate}
+    >
+      <FontAwesomeIcon icon={faPlus} />
+    </Button>
+  );
 }
-
-export default CreateButton

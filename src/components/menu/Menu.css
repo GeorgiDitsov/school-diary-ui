@@ -1,0 +1,33 @@
+.menu {
+  background-color: var(--secondary);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200px;
+  height: 100vh;
+  transition: transform 1s ease-in-out;
+  z-index: 5;
+}
+
+.menu-show {
+  transform: translate3d(0, 0, 0);
+}
+
+.menu-hide {
+  transform: translate3d(-200px, 0, 0);
+}
+
+.menu > ul.options {
+  font-size: 1.125rem;
+  list-style: none;
+  transform: translate(0, 10vh);
+}
+
+.menu > ul.options > li {
+  margin-right: 3rem;
+  margin-bottom: 1rem;
+}
+
+.menu > ul.options > li > a {
+  color: var(--light);
+}

@@ -1,50 +1,37 @@
-import httpRequest from '../utils/httpRequest'
+import httpRequest from "../utils/httpRequest";
 
 class RequestService {
-    
-    async getData(url) {
-        return await httpRequest.get(url)
-            .then(response => {
-                if (response.ok) {
-                    return response.json()
-                }
-            }).then(data => {
-                return data
-            })
-    }
+  async getData(url) {
+    const response = await httpRequest.get(url);
 
-    async create(url, requestBody) {
-        return await httpRequest.post(url, requestBody)
-            .then(response => {
-                if (response.ok) {
-                    return response.json()
-                }
-            }).then(data => {
-                return data
-            })
+    if (response.ok) {
+      return await response.json();
     }
+  }
 
-    async update(url, requestBody) {
-        return await httpRequest.put(url, requestBody)
-            .then(response => {
-                if (response.ok) {
-                    return response.json()
-                }
-            }).then(data => {
-                return data
-            })
-    }
+  async create(url, requestBody) {
+    const response = await httpRequest.post(url, requestBody);
 
-    async delete(url, requestBody) {
-        let isSuccessful = false
-        await httpRequest.delete(url, requestBody)
-            .then(response => {
-                if (response.ok) {
-                    isSuccessful = true
-                }
-            })
-        return isSuccessful
-    }
+    return response.ok;
+  }
+
+  async update(url, requestBody) {
+    const response = await httpRequest.put(url, requestBody);
+
+    return response.ok;
+  }
+
+  async updateV2(url, requestBody) {
+    const response = await httpRequest.patch(url, requestBody);
+
+    return response.ok;
+  }
+
+  async delete(url) {
+    const response = await httpRequest.delete(url);
+
+    return response.ok;
+  }
 }
 
-export default new RequestService()
+export default new RequestService();

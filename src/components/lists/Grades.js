@@ -1,14 +1,11 @@
-import React from 'react'
-import List from '../List'
-import { GradeRow, GradeColumnNames } from './items/Grade'
+import React from "react";
+import { GradeRow, GradeColumns } from "./items/Grade";
+import List from "../List";
 
-const Grades = (props) => {
-    let rows = props.grades.map(grade => <GradeRow key={grade.id} grade={grade}/>)
-    return (
-        <React.Fragment>
-            <List columnNames={<GradeColumnNames/>} rows={rows}/>
-        </React.Fragment>
-    )
+export default function Grades({ grades }) {
+  let rows = grades.map((grade, index) => (
+    <GradeRow key={index} grade={grade} />
+  ));
+
+  return <List columns={<GradeColumns />} rows={rows} />;
 }
-
-export default Grades 

@@ -1,19 +1,23 @@
-import React from 'react'
-import PrincipalContext from '../context/principal-context'
-import LocalizationContext from '../context/localization-context'
-import { Jumbotron } from 'react-bootstrap'
+import React, { useContext, useState } from "react";
+import PrincipalContext from "../contexts/principal-context";
+import LocalizationContext from "../contexts/localization-context";
+import { Jumbotron } from "react-bootstrap";
 
 const Info = () => {
-    const principal = React.useContext(PrincipalContext)
-    const translate = React.useContext(LocalizationContext)
-    const [username] = React.useState(translate('username') + ': ' + principal.username)
-    const [role] = React.useState(translate('role') + ': ' + principal.role)
-    return (
-        <Jumbotron>
-            <h3>{username}</h3>
-            <h3>{role}</h3>
-        </Jumbotron>
-    )
-}
+  const principal = useContext(PrincipalContext);
+  const translate = useContext(LocalizationContext);
 
-export default Info
+  const [username] = useState(
+    `${translate("username")}: ${principal.username}`
+  );
+  const [role] = useState(`${translate("roles")}: ` + principal.roles);
+
+  return (
+    <Jumbotron>
+      <h3>{username}</h3>
+      <h3>{role}</h3>
+    </Jumbotron>
+  );
+};
+
+export default Info;

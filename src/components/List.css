@@ -1,0 +1,12 @@
+.table-responsive {
+  border: 1px solid var(--dark);
+  border-radius: 0.3rem;
+}
+
+.table-responsive > .table.table {
+  margin-bottom: 0;
+}
+
+.table-responsive > table.table td {
+  vertical-align: middle;
+}

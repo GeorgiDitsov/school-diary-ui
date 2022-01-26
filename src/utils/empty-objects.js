@@ -1,62 +1,73 @@
-export const customer = {
-    id: undefined,
-    username: '',
-    password: '',
-    email: ''
-}
+export const user = {
+  id: null,
+  username: "",
+  password: "",
+  email: "",
+};
 
-export const groupOfStudents = {
-    id: undefined,
-    view: ''
-}
+export const schoolGroup = {
+  value: null,
+  label: "",
+};
 
 export const schoolSubject = {
-    id: undefined,
-    name: ''
-}
+  value: null,
+  label: "",
+};
+
+export const schoolSemester = {
+  id: null,
+  name: "",
+  startDate: "",
+  endDate: "",
+  schoolYear: null,
+};
+
+export const schoolYear = {
+  id: null,
+  name: "",
+  startDate: "",
+  endDate: "",
+};
 
 export const student = {
-    id: undefined,
-    name: '',
-    pin: '',
-    groupOfStudents,
-    parents: [],
-    customer
-}
+  id: null,
+  firstName: "",
+  lastName: "",
+  pin: "",
+  group: null,
+  parents: [],
+  user,
+};
 
 export const parent = {
-    id: undefined,
-    name: '',
-    pin: '',
-    customer
-}
+  id: null,
+  firstName: "",
+  lastName: "",
+  pin: "",
+  user,
+};
 
 export const teacher = {
-    id: undefined,
-    name: '',
-    pin: '',
-    schoolSubjects: [],
-    customer
-}
+  id: null,
+  firstName: "",
+  lastName: "",
+  pin: "",
+  subjects: [],
+  user,
+};
 
-export const course = {
-    id: undefined,
-    groupOfStudents,
-    schoolSubject,
-    teacher
-}
-
-export const semester = {
-    id: undefined,
-    begin: '',
-    end: ''
-}
+export const schoolCourse = {
+  id: null,
+  subject: null,
+  teacher: null,
+  group: null,
+  semester: null,
+};
 
 export const grade = {
-    id: undefined,
-    value: 0,
-    inserted: '',
-    updated: '',
-    student,
-    course
-}
+  id: null,
+  value: "",
+  student: null,
+  course: null,
+};

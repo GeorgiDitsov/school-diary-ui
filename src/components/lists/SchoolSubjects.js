@@ -1,41 +1,15 @@
-import React from 'react'
-import { SchoolSubjectRow, SchoolSubjectColumnNames } from './items/SchoolSubject'
-import List from '../List'
-import SchoolSubjectEdit from '../../containers/SchoolSubjectEdit'
+import React from "react";
+import { SchoolSubjectRow, SchoolSubjectColumns } from "./items/SchoolSubject";
+import List from "../List";
 
-const SchoolSubjects = (props) => {
-    const onEdit = (schoolSubject) => {
-        props.onEdit(schoolSubject)
-    }
-    const onDelete = (schoolSubjectId) => {
-        props.onDelete(schoolSubjectId)
-    }
-    const handleSubmit = (schoolSubject) => {
-        props.handleSubmit(schoolSubject)
-    }
-    const handleModal = () => {
-        props.handleModal()
-    }
-    const rows = props.schoolSubjects.map(schoolSubject => 
-        <SchoolSubjectRow 
-            key={schoolSubject.id} 
-            schoolSubject={schoolSubject} 
-            onEdit={onEdit} 
-            onDelete={onDelete}
-        />
-    )
-    return (
-        <React.Fragment>
-            {props.showModal &&
-                <SchoolSubjectEdit 
-                    schoolSubject={props.schoolSubject} 
-                    handleSubmit={handleSubmit} 
-                    handleModal={handleModal}
-                />
-            }
-            <List columnNames={(<SchoolSubjectColumnNames/>)} rows={rows}/>
-        </React.Fragment>
-    )
+export default function SchoolSubjects({ schoolSubjects, onEdit, onDelete }) {
+  const rows = schoolSubjects.map((schoolSubject, index) => (
+    <SchoolSubjectRow
+      key={index}
+      schoolSubject={schoolSubject}
+      onEdit={onEdit}
+      onDelete={onDelete}
+    />
+  ));
+  return <List columns={<SchoolSubjectColumns />} rows={rows} />;
 }
-
-export default SchoolSubjects

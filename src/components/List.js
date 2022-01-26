@@ -1,22 +1,14 @@
-import React from 'react'
-import LocalizationContext from '../context/localization-context'
-import { Table } from 'react-bootstrap'
+import React from "react";
+import { Table } from "react-bootstrap";
+import "./List.css";
 
-const List = (props) => {
-    const translate = React.useContext(LocalizationContext)
-    return (
-        <Table bordered striped responsive>
-            <thead className='thead-dark'>
-                <tr>
-                    {props.columnNames}
-                    <th>{translate('actions')}</th>
-                </tr>
-            </thead>
-            <tbody>
-                {props.rows}
-            </tbody>
-        </Table>
-    )
+export default function List({ columns, rows }) {
+  return (
+    <Table size="sm" responsive>
+      <thead className="thead-dark">
+        <tr>{columns}</tr>
+      </thead>
+      <tbody>{rows}</tbody>
+    </Table>
+  );
 }
-
-export default List

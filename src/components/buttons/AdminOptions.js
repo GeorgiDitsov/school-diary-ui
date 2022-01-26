@@ -1,23 +1,30 @@
-import React from 'react'
-import LocalizationContext from '../../context/localization-context'
-import { ButtonGroup, Button } from 'react-bootstrap'
+import React, { useContext } from "react";
+import LocalizationContext from "../../contexts/localization-context";
+import { ButtonGroup, Button } from "react-bootstrap";
 
 const AdminOptions = ({ item, onEdit, onDelete }) => {
-    const translate = React.useContext(LocalizationContext)
-    return (
-        <td>
-            <ButtonGroup>
-                {onEdit && 
-                    <Button variant='primary' onClick={() => onEdit(item)}>
-                        {translate('edit')}
-                    </Button>}
-                {onDelete && 
-                    <Button variant='danger' onClick={() => onDelete(item.id)}>
-                        {translate('delete')}
-                    </Button>}
-            </ButtonGroup>
-        </td>
-    )
-}
+  const translate = useContext(LocalizationContext);
 
-export default AdminOptions
+  return (
+    <td>
+      <ButtonGroup>
+        {onEdit && (
+          <Button size="sm" variant="primary" onClick={() => onEdit(item)}>
+            {translate("edit")}
+          </Button>
+        )}
+        {onDelete && (
+          <Button
+            size="sm"
+            variant="danger"
+            onClick={() => onDelete(item.id || item.value)}
+          >
+            {translate("delete")}
+          </Button>
+        )}
+      </ButtonGroup>
+    </td>
+  );
+};
+
+export default AdminOptions;

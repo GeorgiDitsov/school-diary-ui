@@ -1,44 +1,40 @@
-import React from 'react'
-import { StudentRow, StudentColumnNames } from './items/Student'
-import StudentEdit from '../../containers/StudentEdit'
-import List from '../List'
-import { withTranslation } from 'react-i18next'
+import React, { useContext } from "react";
+import PrincipalContext from "../../contexts/principal-context";
+import { ROLE_ADMIN, ROLE_TEACHER } from "../../utils/constants";
+import {
+  StudentRow,
+  StudentColumns,
+  StudentAndGradesRow,
+  StudentAndGradesColumns,
+} from "./items/Student";
+import List from "../List";
 
-const Students = (props) => {
-    const onEdit = (student) => {
-        props.onEdit(student)
-    }
-    const onDelete = (studentId) => {
-        props.onDelete(studentId)
-    }
-    const handleSubmit = (student) => {
-        props.handleSubmit(student)
-    }
-    const handleModal = () => {
-        props.handleModal()
-    }
-    const rows = props.students.map(student => 
-        <StudentRow 
-            key={student.id} 
-            student={student} 
-            onEdit={onEdit} 
-            onDelete={onDelete}
+export default function Students({ students, onCreate, onEdit, onDelete }) {
+  const principal = useContext(PrincipalContext);
+
+  const columns =
+    (principal.roles.includes(ROLE_ADMIN) && <StudentColumns />) ||
+    (principal.roles.includes(ROLE_TEACHER) && <StudentAndGradesColumns />);
+
+  const rows = students.map(
+    (student, index) =>
+      (principal.roles.includes(ROLE_ADMIN) && (
+        <StudentRow
+          key={index}
+          student={student}
+          onEdit={onEdit}
+          onDelete={onDelete}
         />
-    )
-    return (
-        <React.Fragment>
-            {props.showModal && 
-                <StudentEdit 
-                    handleModal={handleModal} 
-                    student={props.student} 
-                    groups={props.groups} 
-                    parents={props.parents} 
-                    handleSubmit={handleSubmit}
-                />
-            }
-            <List columnNames={(<StudentColumnNames/>)} rows={rows}/>
-        </React.Fragment>
-    )
-}
+      )) ||
+      (principal.roles.includes(ROLE_TEACHER) && (
+        <StudentAndGradesRow
+          key={index}
+          student={student}
+          onCreate={onCreate}
+          onEdit={onEdit}
+        />
+      ))
+  );
 
-export default withTranslation()(Students)
+  return <List columns={columns} rows={rows} />;
+}
